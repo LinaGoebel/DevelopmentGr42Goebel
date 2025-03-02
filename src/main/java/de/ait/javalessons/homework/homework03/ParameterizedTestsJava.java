@@ -1,6 +1,8 @@
 package de.ait.javalessons.homework.homework03;
 
-import java.util.Optional;
+
+
+
 
 public class ParameterizedTestsJava {
     public static void main(String[] args) {
@@ -29,6 +31,7 @@ public class ParameterizedTestsJava {
 
     public static int divide(int a, int b) {
         if (b == 0) {
+           // log.error("Division b y zero. a: {}, b: {}", a, b);
             throw new IllegalArgumentException("Division by zero is not allowed.");
         }
         return a / b;
