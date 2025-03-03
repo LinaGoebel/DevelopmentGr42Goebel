@@ -1,9 +1,9 @@
 package de.ait.javalessons.homework.homework03;
 
 
+import lombok.extern.slf4j.Slf4j;
 
-
-
+@Slf4j
 public class ParameterizedTestsJava {
     public static void main(String[] args) {
         System.out.println(add(1, 2));
@@ -31,7 +31,7 @@ public class ParameterizedTestsJava {
 
     public static int divide(int a, int b) {
         if (b == 0) {
-           // log.error("Division b y zero. a: {}, b: {}", a, b);
+            log.error("Division b y zero. a: {}, b: {}", a, b);
             throw new IllegalArgumentException("Division by zero is not allowed.");
         }
         return a / b;
