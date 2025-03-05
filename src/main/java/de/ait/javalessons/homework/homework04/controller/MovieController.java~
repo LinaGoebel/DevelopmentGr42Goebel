@@ -1,0 +1,29 @@
+package de.ait.javalessons.homework.homework04.controller;
+
+import de.ait.javalessons.homework.homework04.Movie;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//Определите List<Movie> как временное хранилище (in-memory list), где будет храниться список фильмов.
+//Добавьте в контроллер несколько готовых фильмов, чтобы при запуске приложения в списке уже было несколько записей.
+//Реализуйте следующие конечные точки (endpoints):
+//GET /movies — возвращает список всех фильмов.
+//GET /movies/{id} — возвращает конкретный фильм по его id. Если фильм не найден, верните сообщение об ошибке или подходящий HTTP-статус (например, 404 Not Found).
+//POST /movies — добавляет новый фильм в список. Данные о фильме могут приходить в формате JSON. Верните в ответе информацию о добавленном фильме или статус 201 Created.
+//(Опционально) DELETE /movies/{id} — удаляет фильм из списка по id.
+public class MovieController {
+
+    private List<Movie> movieList = new ArrayList<>();
+
+    public MovieController() {
+        movieList.addAll(
+                List.of(
+                        new Movie(1, "The Shawshank Redemption", "Drama", 1994),
+                        new Movie(2, "The Godfather", "Drama", 1972),
+                        new Movie(3, "The Dark Knight", "Action", 2008),
+                        new Movie(4, "Pulp Fiction", "Crime", 1994)
+                ));
+
+    }
+}
