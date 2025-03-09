@@ -20,8 +20,8 @@ public class RestApiCarControllerTest {
 
     @BeforeEach
     void setUp() {
-        restApiCarController = new RestApiCarController();
-    }
+        restApiCarController = new RestApiCarController(null);
+    }//TODO
 
     @Test
     void testGetCarsReturnDefaultCars() {
