@@ -16,6 +16,8 @@ public class BankAccountService {
 
     private BankAccountRepository bankAccountRepository;
 
+    private String message = "Amount must be greater than 0";
+
     @Value("${bank.min-balance:0.0}")
     private double minBalance;
 
@@ -38,12 +40,12 @@ public class BankAccountService {
     }
 
     @Transactional
-    public double deposit(double amount, Long bankAccountId){
+    public double deposit(double amount, Long bankAccountId) {
         BankAccount bankAccount = bankAccountRepository.findById(bankAccountId)
                 .orElseThrow(() -> new IllegalArgumentException("Bank account with id " + bankAccountId + " not found"));
-        if(amount <= 0){
-            log.error("Amount must be greater than 0");
-            throw new IllegalArgumentException("Amount must be greater than 0");
+        if (amount <= 0) {
+            log.error(message);
+            throw new IllegalArgumentException(message);
         }
         bankAccount.setBalance(bankAccount.getBalance() + amount);
         BankAccount savedBankAccount = bankAccountRepository.save(bankAccount);
@@ -51,26 +53,25 @@ public class BankAccountService {
     }
 
     @Transactional
-    public double withdraw(double amount, Long bankAccountId){
+    public double withdraw(double amount, Long bankAccountId) {
         BankAccount bankAccount = bankAccountRepository.findById(bankAccountId)
                 .orElseThrow(() -> new IllegalArgumentException("Bank account with id " + bankAccountId + " not found"));
-        if(amount <= 0){
-            log.error("Amount must be greater than 0");
-            throw new IllegalArgumentException("Amount must be greater than 0");
+        if (amount <= 0) {
+            log.error(message);
+            throw new IllegalArgumentException(message);
         }
-        if(amount > bankAccount.getBalance()){
+        if (amount > bankAccount.getBalance()) {
             log.error("Amount is greater than the current balance");
             throw new IllegalArgumentException("Amount is greater than the current balance");
         }
-        if(bankAccount.getBalance() - amount < minBalance){
+        if (bankAccount.getBalance() - amount < minBalance) {
             log.error("The current balance is less than the minimum balance");
             throw new IllegalArgumentException("The current balance is less than the minimum balance");
-        }
-        else {
+        } else {
             bankAccount.setBalance(bankAccount.getBalance() - amount);
+            log.info("Withdrawal of {} from account with id {} resulted in balance {}", amount, bankAccountId, bankAccount.getBalance());
             BankAccount savedBankAccount = bankAccountRepository.save(bankAccount);
             return savedBankAccount.getBalance();
         }
     }
-
 }

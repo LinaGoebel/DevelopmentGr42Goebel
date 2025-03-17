@@ -3,7 +3,7 @@ package de.ait.javalessons.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity // Аннотация, указывающая, что этот класс является сущностью JPA
 public class Car {
 
     @Id

@@ -13,10 +13,14 @@ public class BankAccount {
     private Long id;
 
     private String accountNumber;
+
     private String ownerName;
+
     private double balance;
 
+
     public BankAccount() {
+
     }
 
     public BankAccount(String accountNumber, String ownerName, double balance) {
@@ -24,6 +28,11 @@ public class BankAccount {
         this.ownerName = ownerName;
         this.balance = balance;
     }
+
+    public Long getId() {
+        return id;
+    }
+
 
     public String getAccountNumber() {
         return accountNumber;
@@ -48,9 +57,4 @@ public class BankAccount {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    public Long getId() {
-        return id;
-    }
-
 }
