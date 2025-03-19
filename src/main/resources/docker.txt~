@@ -1,0 +1,13 @@
+docker ps выводит список запущенных контейнеров
+
+docker ps -a выводит список всех контейнеров
+
+docker build собирает образ из Dockerfile
+
+docker images выводит все images
+
+docker stop останавливает работу контейнера
+
+docker rm удаляет  остановленный контейнер
+
+docker rmi удаляет image
