@@ -1,6 +1,5 @@
 package de.ait.javalessons.configuration;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration // Аннотация, указывающая, что этот класс содержит конфигурацию Spring.
+//@Configuration // Аннотация, указывающая, что этот класс содержит конфигурацию Spring.
 public class SecurityConfig {
 
     @Bean // Аннотация, указывающая, что метод возвращает bean, который должен быть управляем Spring контейнером.
@@ -42,6 +41,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/employees/**")
                 .csrf(csrf -> csrf.disable()) // Отключает CSRF защиту (обычно используется для REST API).
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(("/employees/public/**")).permitAll() // Разрешает доступ к /employees/public/** всем пользователям.

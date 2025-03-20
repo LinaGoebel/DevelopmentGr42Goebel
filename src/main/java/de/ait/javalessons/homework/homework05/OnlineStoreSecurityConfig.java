@@ -15,12 +15,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class OnlineStoreSecurityConfig {
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder onlineStorePasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder) {
+    public InMemoryUserDetailsManager onlineStoreUserDetailsManager(PasswordEncoder passwordEncoder) {
         UserDetails customer = User.withUsername("customer")
                 .password(passwordEncoder.encode("customerpass"))
                 .roles("CUSTOMER")
@@ -33,14 +33,15 @@ public class OnlineStoreSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain onlineStoreSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/products/**")
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/products/public/list").permitAll()
                         .requestMatchers("/products/customer/cart").hasRole("CUSTOMER")
                         .requestMatchers("/products/manager/add").hasRole("MANAGER")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/products/**").authenticated()
                 )
                 .formLogin(withDefaults());
         return http.build();

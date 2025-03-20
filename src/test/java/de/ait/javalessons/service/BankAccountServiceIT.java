@@ -135,14 +135,14 @@ public class BankAccountServiceIT {
     }
 
     @Test
-    @DisplayName("Deposit negative test - negative amount")
+    @DisplayName("Deposit negative test - amount exceeds max limit")
     void testDepositNegative() {
-        // Пытаемся пополнить на отрицательную сумму
-        String url = BASE_URL + "/" + accountFour.getId() + "/deposit?amount=-100";
+        // Предположим, что свыше 5000 нельзя пополнять (логика в сервисе)
+        String url = BASE_URL + "/" + accountFour.getId() + "/deposit?amount=5001";
         ResponseEntity<String> response =
                 testRestTemplate.postForEntity(url, null, String.class);
 
-        // Ожидаем ошибку из-за отрицательной суммы
+        // Ожидаем, что сервис выбросит исключение -> HTTP 500
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
@@ -167,10 +167,10 @@ public class BankAccountServiceIT {
     }
 
     @Test
-    @DisplayName("Withdraw negative test - amount exceeds balance")
+    @DisplayName("Withdraw negative test - amount exceeds max limit")
     void testWithdrawNegative() {
-        // Пытаемся снять сумму, превышающую баланс
-        String url = BASE_URL + "/" + accountFour.getId() + "/withdraw?amount=" + (accountFour.getBalance() + 1);
+        // Предположим, нельзя снимать свыше 2000 за раз (логика в сервисе)
+        String url = BASE_URL + "/" + accountFour.getId() + "/withdraw?amount=2003";
         ResponseEntity<String> response =
                 testRestTemplate.postForEntity(url, null, String.class);
 
@@ -179,10 +179,11 @@ public class BankAccountServiceIT {
     }
 
     @Test
-    @DisplayName("Withdraw negative test - negative amount")
-    void testWithdrawNegativeAmount() {
-        // Пытаемся снять отрицательную сумму
-        String url = BASE_URL + "/" + accountTwo.getId() + "/withdraw?amount=-100";
+    @DisplayName("Withdraw negative test - amount on account less than min limit")
+    void testWithdrawNegativeLowAmount() {
+        // Предположим, если после снятия на счёте останется < 100 (логика в сервисе),
+        // то тоже ошибка
+        String url = BASE_URL + "/" + accountTwo.getId() + "/withdraw?amount=990";
         ResponseEntity<String> response =
                 testRestTemplate.postForEntity(url, null, String.class);
 

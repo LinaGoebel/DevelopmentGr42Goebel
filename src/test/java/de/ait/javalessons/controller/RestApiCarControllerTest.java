@@ -33,7 +33,7 @@ public class RestApiCarControllerTest {
     }
 
     @Test
-    void testGetCarsReturnDefaultCars() {
+    void testGetCarsReturnDefaultCars(){
         Iterable<Car> resultCarsIterable = restApiCarController.getCars();
         List<Car> resultCars = new ArrayList<>();
         resultCarsIterable.forEach(resultCars::add);
@@ -43,20 +43,20 @@ public class RestApiCarControllerTest {
     }
 
     @Test
-    void testGetCarByIdWasFound() {
+    void testGetCarByIdWasFound(){
         Optional<Car> result = restApiCarController.getCarById("1");
         assertTrue(result.isPresent());
         assertEquals("BMW M1", result.get().getName());
     }
 
     @Test
-    void testGetCarByIdWasNotFound() {
+    void testGetCarByIdWasNotFound(){
         Optional<Car> result = restApiCarController.getCarById("10");
         assertFalse(result.isPresent());
     }
 
     @Test
-    void testPostCarAddNewCar() {
+    void testPostCarAddNewCar(){
         Car carToAdd = new Car("5", "Tesla Model 1");
         Car result = restApiCarController.postCar(carToAdd);
         assertEquals("Tesla Model 1", result.getName());
@@ -69,7 +69,7 @@ public class RestApiCarControllerTest {
     }
 
     @Test
-    void testPutCarUpdateCarInfo() {
+    void testPutCarUpdateCarInfo(){
         Car carToAdd = new Car("1", "Tesla Model 1");
         ResponseEntity<Car> responseEntityResult = restApiCarController.putCar("1", carToAdd);
         assertEquals(200, responseEntityResult.getStatusCodeValue());
@@ -77,7 +77,7 @@ public class RestApiCarControllerTest {
     }
 
     @Test
-    void testPutCarCreateNewCar() {
+    void testPutCarCreateNewCar(){
         Car carToAdd = new Car("10", "Tesla Model 1");
         ResponseEntity<Car> responseEntityResult = restApiCarController.putCar("10", carToAdd);
         assertEquals(201, responseEntityResult.getStatusCodeValue());
@@ -85,14 +85,14 @@ public class RestApiCarControllerTest {
     }
 
     @Test
-    void testDeleteCarSuccess() {
+    void testDeleteCarSuccess(){
         Iterable<Car> resultCarsIterable = restApiCarController.getCars();
         List<Car> resultCars = new ArrayList<>();
         resultCarsIterable.forEach(resultCars::add);
         assertEquals(5, resultCars.size());
         restApiCarController.deleteCar("1");
         Iterable<Car> resultCarsIterableDeletedCar = restApiCarController.getCars();
-        resultCars = new ArrayList<>();
+        resultCars =  new ArrayList<>();
         resultCarsIterableDeletedCar.forEach(resultCars::add);
         assertEquals(4, resultCars.size());
     }
