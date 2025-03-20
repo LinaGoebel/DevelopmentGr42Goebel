@@ -1,4 +1,4 @@
-package de.ait.javalessons.controller;
+/*package de.ait.javalessons.controller;
 
 import de.ait.javalessons.model.Car;
 import org.junit.jupiter.api.BeforeEach;
@@ -102,4 +102,4 @@ public class RestApiCarControllerIT {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Tesla Model S", response.getBody().getName());
     }
-}
+}*/

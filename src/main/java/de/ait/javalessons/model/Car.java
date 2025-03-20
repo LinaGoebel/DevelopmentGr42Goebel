@@ -4,19 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity // Аннотация, указывающая, что этот класс является сущностью JPA
+// @Entity - Annotation indicating that this class is a JPA entity
 public class Car {
 
-    @Id
+    @Id // Аннотация, указывающая, что это поле является первичным ключом
+    // @Id - Annotation indicating that this field is the primary key
     private String id;
     private String name;
+
+    public Car() {
+        // Конструктор по умолчанию, необходим для JPA
+        // Default constructor, required for JPA
+    }
 
     public Car(String id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Car() {
-
     }
 
     public void setId(String id) {

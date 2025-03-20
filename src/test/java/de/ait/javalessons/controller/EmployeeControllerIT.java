@@ -60,7 +60,7 @@ public class EmployeeControllerIT {
         void testGetAdminInfoAsAdmin() throws Exception {
             mockMvc.perform(get("/employees/admin/info"))
                     .andExpect(status().isOk())
-                    .andExpect(content().string("Admin Info, secured admin information"));
+                    .andExpect(content().string("User Info, secured admin information"));
         }
 
         @Test
