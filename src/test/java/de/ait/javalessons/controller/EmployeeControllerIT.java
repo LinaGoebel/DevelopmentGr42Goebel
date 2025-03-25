@@ -43,7 +43,7 @@ public class EmployeeControllerIT {
         }
 
         @Test
-        @DisplayName("Когда пользователь не авторизован, происходит перенаправление на страницу логина")
+        @DisplayName("Когда пользователь не авторизован, ")
         void testGetUserInfoAsAnonymous() throws Exception {
             mockMvc.perform(get("/employees/user/info"))
                     .andExpect(status().is3xxRedirection());

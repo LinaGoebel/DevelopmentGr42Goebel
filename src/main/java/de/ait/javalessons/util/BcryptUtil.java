@@ -6,12 +6,10 @@ public class BcryptUtil {
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String password = "adminpass";
-
-        String encoderPassword = encoder.encode(password);
-        System.out.println(password + "-->" + encoderPassword);
-
-        //  userpass-->$2a$10$T6sAgKK5VhWVfCtMzTFFKeyDRc3Akplfnomaszb29aJ78gbTfxRvy
-        // adminpass-->$2a$10$QuZhvEKSj/urNBcv0e.d8.amolVqh5nCQE8gE3qg4tSWuu2ThMs9q
-
+        String encodetPassword = encoder.encode(password);
+        System.out.println(password + "-->"+ encodetPassword);
     }
+
+    //userpass-->$2a$10$XTYrfRQzPUDsJ.smAKwRougTNtZ80Ak267mGWnaYYQMZG9KaZD2jy
+    //adminpass-->$2a$10$pSM3dZIRXDX9qX2R94tF1ehbH6HcKGwApQJDwl3NmC8bvmlIbmqrK
 }

@@ -14,7 +14,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class OnlineStoreSecurityConfig {
-    @Bean
+  /*  @Bean
     public PasswordEncoder onlineStorePasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -45,5 +45,5 @@ public class OnlineStoreSecurityConfig {
                 )
                 .formLogin(withDefaults());
         return http.build();
-    }
+    }*/
 }

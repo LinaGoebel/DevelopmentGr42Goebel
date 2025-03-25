@@ -144,4 +144,6 @@ public class BankAccountServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> bankAccountService.withdraw(tooBigAmount, testAccount.getId()));
         assertEquals("The current balance is less than the minimum balance", exception.getMessage());
     }
+
+
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    @GetMapping("/public/list")
+  /*  @GetMapping("/public/list")
     public ResponseEntity<String> getProducts() {
         return ResponseEntity.ok("Product List, public information");
     }
@@ -21,5 +21,5 @@ public class ProductController {
     @GetMapping("/manager/add")
     public ResponseEntity<String> addProduct() {
         return ResponseEntity.ok("Add product, manager information");
-    }
+    }*/
 }
